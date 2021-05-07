@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 6612050615631173708}
+  cameraHandle: {fileID: 6612050615182294869}
   moveSpeed: 6
   jumpForce: 380
   jumpBufferTime: 0.2
@@ -87,7 +88,10 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  _isGrounded: 0
+  horizontalSensitivity: 1
+  verticalSensitivity: 1
+  minimumPitch: -89.9
+  maximumPitch: 89.9
 --- !u!54 &6612050615631173708
 Rigidbody:
   m_ObjectHideFlags: 0
