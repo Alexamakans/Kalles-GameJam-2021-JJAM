@@ -5,6 +5,7 @@ using UnityEngine;
 public class FpsController : MonoBehaviour
 {
     public Rigidbody body;
+    public GameObject cameraHandle;
     
     [Header("Movement Settings")]
     public float moveSpeed = 6f;
@@ -13,12 +14,19 @@ public class FpsController : MonoBehaviour
     public float groundedCheckRange = 1.1f;
     public LayerMask groundLayerMask;
 
+    [Header("Camera Settings")]
+    public float horizontalSensitivity = 1f;
+    public float verticalSensitivity = 1f;
+    public float minimumPitch = -89.9f;
+    public float maximumPitch = 89.9f;
+
     private float _bufferedJumpTimer;
     private bool isJumpQueued => _bufferedJumpTimer > 0f;
-    [SerializeField]
     private bool _isGrounded = false;
-
     private Vector3 _moveInput;
+
+    private float _yaw = 0f;
+    private float _pitch = 0f;
 
     void Reset()
     {
@@ -28,6 +36,11 @@ public class FpsController : MonoBehaviour
         body.mass = 75f;
         body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 #endif
+    }
+
+    void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -42,6 +55,36 @@ public class FpsController : MonoBehaviour
         else if (isJumpQueued)
         {
             _bufferedJumpTimer -= Time.deltaTime;
+        }
+
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            var deltaYaw = Input.GetAxisRaw("Mouse X");
+            var deltaPitch = Input.GetAxisRaw("Mouse Y");
+
+            _yaw += deltaYaw * horizontalSensitivity;
+            // Constraint: -180 < _yaw <= 180
+            _yaw = (_yaw + 360f) % 360f;
+
+            _pitch = Mathf.Clamp(
+                _pitch - deltaPitch * verticalSensitivity,
+                minimumPitch, maximumPitch);
+
+            var newEuler = transform.eulerAngles;
+            newEuler.y = _yaw;
+            transform.eulerAngles = newEuler;
+
+            var newCameraEuler = cameraHandle.transform.eulerAngles;
+            newCameraEuler.x = _pitch;
+            cameraHandle.transform.eulerAngles = newCameraEuler;
+        }
+
+        // Temporary (?) implementation of toggling cursor lock state
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked
+                ? CursorLockMode.None
+                : CursorLockMode.Locked;
         }
     }
 
@@ -58,7 +101,8 @@ public class FpsController : MonoBehaviour
         if (_isGrounded)
         {
             // Ground control
-            SetVelocity(_moveInput * moveSpeed);
+            var moveVector = transform.TransformVector(_moveInput.normalized);
+            SetVelocity(moveVector * moveSpeed);
         }
         else
         {
