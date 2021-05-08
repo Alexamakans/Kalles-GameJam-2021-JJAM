@@ -12,12 +12,18 @@ public class Trampoline : MonoBehaviour
 
     void Awake()
     {
+        if (!directionMarker)
+        {
+            Debug.LogError($"{nameof(directionMarker)} was null. SET IT!! >:)");
+            return;
+        }
+
         launchDirection = (directionMarker.position - transform.position).normalized;
     }
 
+#if UNITY_EDITOR
     void Update()
     {
-#if UNITY_EDITOR
         if (!Application.isPlaying)
         {
             var markerDir = directionMarker.position - transform.position;
@@ -25,8 +31,8 @@ public class Trampoline : MonoBehaviour
             directionMarker.position = transform.position
                 + launchDirection * Mathf.Max(launchForce * 0.01f, 2f);
         }
-#endif
     }
+#endif
 
     void OnDrawGizmos()
     {
@@ -39,6 +45,15 @@ public class Trampoline : MonoBehaviour
         {
             otherBody.velocity = Vector3.zero;
             otherBody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.rigidbody)
+        {
+            other.rigidbody.velocity = Vector3.zero;
+            other.rigidbody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
         }
     }
 }
