@@ -40,3 +40,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/auto-fetch.ps1
