@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6612050615631173711}
   - component: {fileID: 6612050615631173682}
   - component: {fileID: 6612050615631173709}
+  - component: {fileID: 1736996102}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -81,7 +82,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 6612050615631173708}
   cameraHandle: {fileID: 6612050615182294869}
-  moveSpeed: 8
+  walkSpeed: 6
+  sprintSpeed: 8
+  groundControl: 1
   airControl: 0.95
   speedChangeRate: 0.23
   jumpForce: 420
@@ -174,6 +177,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1736996102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6612050615631173704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e847478690925d940a186d33d8368c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 30
+  autoTargetRadius: 3
+  raycastFrom: {fileID: 6612050615182294874}
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 65
+  hookableLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &6612050616106905570
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +254,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.4
-  far clip plane: 30
+  far clip plane: 150
   field of view: 80
   orthographic: 0
   orthographic size: 5
