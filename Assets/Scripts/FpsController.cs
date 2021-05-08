@@ -8,14 +8,19 @@ public class FpsController : MonoBehaviour
     public GameObject cameraHandle;
     
     [Header("Movement Settings")]
-    public float walkSpeed = 6f;
-    public float sprintSpeed = 8f;
+    public float walkAcceleration = 6f;
+    public float sprintAcceleration = 8f;
+    public float maxWalkSpeed = 5f;
+    public float maxSprintSpeed = 8f;
+    [Range(0, 1)]
+    public float airTurnSpeed = 0.02f;
+    public float groundTurnSpeed = 0.25f;
+    public float airDrag = 0.6f;
+    public float groundDrag = 0.6f;
     [Range(0, 1)]
     public float groundControl = 1f;
     [Range(0, 1)]
     public float airControl = 0f;
-    [Range(0, 1)]
-    public float speedChangeRate = 0f;
 
     public float jumpForce = 380f;
     public float jumpBufferTime = 0.2f;
@@ -31,16 +36,21 @@ public class FpsController : MonoBehaviour
     private float _bufferedJumpTimer;
 
     private Vector3 _moveInput;
-    private bool isSprinting => Input.GetButton("Sprint");
+    private bool isSprinting => _wasSprinting || (_isGrounded && Input.GetButton("Sprint"));
 
     private float _yaw = 0f;
     private float _pitch = 0f;
 
     private bool _isGrounded = false;
+    [SerializeField]
+    private bool _wasSprinting = false;
 
-    private float moveSpeed => (_isGrounded && isSprinting) ? sprintSpeed : walkSpeed;
+    private float moveAcceleration => isSprinting ? sprintAcceleration : walkAcceleration;
     private float moveControl => _isGrounded ? groundControl : airControl;
+    private float maxSpeed => isSprinting ? maxSprintSpeed : maxWalkSpeed;
     private bool isJumpQueued => _bufferedJumpTimer > 0f;
+    private float drag => _isGrounded ? groundDrag : airDrag;
+    private float turnSpeed => _isGrounded ? groundTurnSpeed : airTurnSpeed;
 
     void Reset()
     {
@@ -108,14 +118,40 @@ public class FpsController : MonoBehaviour
 
         if (_isGrounded && isJumpQueued)
         {
+            _wasSprinting = isSprinting;
             Jump();
             _bufferedJumpTimer = 0f;
         }
 
+        //if (Mathf.Approximately(moveVector.sqrMagnitude, 0f))
+        //{
+        var newVelocity = body.velocity;
+        newVelocity.x *= 1f - drag;
+        newVelocity.z *= 1f - drag;
+        SetVelocity(newVelocity);
+        //}
+
         var moveVector = transform.TransformVector(_moveInput.normalized);
-        moveVector *= moveSpeed * moveControl;
-        moveVector.y = body.velocity.y;
-        SetVelocity(moveVector, speedChangeRate);
+
+        var planeVelocity = Vector3.Scale(newVelocity, Vector3.right + Vector3.forward);
+        var VoM = Vector3.Dot(planeVelocity.normalized, moveVector);
+     
+        if (VoM < 0.0f || (planeVelocity.magnitude <= maxSpeed))
+        {
+            moveVector *= moveAcceleration * moveControl;
+            body.AddForce(moveVector, ForceMode.Acceleration);
+        }
+        else
+        {
+            if (Mathf.Approximately(moveVector.sqrMagnitude, 0f))
+            {
+                moveVector = planeVelocity.normalized;
+            }
+
+            var rotatedVelocity = Vector3.Slerp(planeVelocity.normalized, moveVector, turnSpeed) * planeVelocity.magnitude;
+            rotatedVelocity.y = body.velocity.y;
+            SetVelocity(rotatedVelocity);
+        }
     }
 
     void Jump()
@@ -136,6 +172,7 @@ public class FpsController : MonoBehaviour
                 groundLayerMask))
         {
             _isGrounded = true;
+            _wasSprinting = false;
         }
         else
         {
@@ -146,12 +183,6 @@ public class FpsController : MonoBehaviour
     void SetVelocity(Vector3 velocity)
     {
         body.AddForce(velocity - body.velocity, ForceMode.VelocityChange);
-    }
-
-    void SetVelocity(Vector3 targetVelocity, float lerpRate)
-    {
-        var actualVelocity = Vector3.Lerp(body.velocity, targetVelocity, lerpRate);
-        body.AddForce(actualVelocity - body.velocity, ForceMode.VelocityChange);
     }
 
     void OnDrawGizmosSelected()
