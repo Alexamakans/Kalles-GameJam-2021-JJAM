@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
-public class Trampolean : MonoBehaviour
+public class Trampoline : MonoBehaviour
 {
     [SerializeField] float _launchForce = 20f;
     [SerializeField] Vector3 _direction = Vector3.up;
