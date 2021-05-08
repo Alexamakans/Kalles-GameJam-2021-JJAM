@@ -10,6 +10,11 @@ public class Trampoline : MonoBehaviour
     
     public Vector3 launchDirection { get; private set; }
 
+    void Awake()
+    {
+        launchDirection = (directionMarker.position - transform.position).normalized;
+    }
+
     void Update()
     {
 #if UNITY_EDITOR
@@ -28,12 +33,12 @@ public class Trampoline : MonoBehaviour
         Gizmos.DrawRay(transform.position, launchDirection * Mathf.Max(launchForce * 0.01f, 2f));
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider collider)
     {
-        if (other.rigidbody)
+        if (collider.TryGetComponent<Rigidbody>(out var otherBody))
         {
-            other.rigidbody.velocity = Vector3.zero;
-            other.rigidbody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
+            otherBody.velocity = Vector3.zero;
+            otherBody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
         }
     }
 }
