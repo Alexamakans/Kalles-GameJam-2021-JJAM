@@ -189,8 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e847478690925d940a186d33d8368c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 30
-  autoTargetRadius: 3
+  range: 12
+  autoTargetRadius: 2.5
+  hookSpeed: 0.95
+  hookEndUpForce: 700
   raycastFrom: {fileID: 6612050615182294874}
   hitLayerMask:
     serializedVersion: 2
@@ -198,6 +200,7 @@ MonoBehaviour:
   hookableLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  body: {fileID: 6612050615631173708}
 --- !u!1 &6612050616106905570
 GameObject:
   m_ObjectHideFlags: 0
