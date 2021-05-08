@@ -8,9 +8,12 @@ public class Hook : MonoBehaviour
     public float endHookDistance = 1f;
 
     [Range(0, 10)]
-    [Tooltip("In percentage of distance travelled per second")]
-    public float hookSpeed = 0.5f;
+    [Tooltip("In units per second")]
+    public float hookMoveSpeed = 6.0f;
     public float hookEndUpForce = 750f;
+    public float hookCancelUpForce = 400f;
+    [Range(0, 5)]
+    public float hookCancelPercentageOfVelocity = 1f;
     public Transform raycastFrom;
     public LayerMask hitLayerMask;
     public LayerMask hookableLayerMask;
@@ -20,7 +23,6 @@ public class Hook : MonoBehaviour
     private Vector3 _targetPosition;
     private Vector3 _raycastSphereStop;
     private bool _isHooking;
-    private float _hookPercentageDone = 0f;
     private Vector3 _hookStartPosition;
 
     void Reset()
@@ -32,17 +34,23 @@ public class Hook : MonoBehaviour
     {
         if (_isHooking)
         {
-            body.position = Vector3.Lerp(_hookStartPosition, _targetPosition, Mathf.Pow(_hookPercentageDone, 1.3f));
-            _hookPercentageDone += Time.deltaTime * hookSpeed;
-
-            var distanceLeft = (body.position - _targetPosition).magnitude;
-            if (distanceLeft <= endHookDistance || _hookPercentageDone >= 1f)
+            body.position = Vector3.MoveTowards(body.position, _targetPosition, Time.deltaTime * hookMoveSpeed);
+            var toTarget = _targetPosition - body.position;
+            var distanceLeft = toTarget.magnitude;
+            if (distanceLeft <= endHookDistance)
             {
-                _hookPercentageDone = 0f;
                 _isHooking = false;
                 body.isKinematic = false;
                 body.velocity = Vector3.zero;
                 body.AddForce(Vector3.up * hookEndUpForce, ForceMode.Impulse);
+            }
+            else if (Input.GetButtonDown("Jump"))
+            {
+                _isHooking = false;
+                body.isKinematic = false;
+                body.velocity = Vector3.zero;
+                body.AddForce(Vector3.up * hookEndUpForce, ForceMode.Impulse);
+                body.AddForce(toTarget.normalized * hookCancelPercentageOfVelocity, ForceMode.VelocityChange);
             }
         } else if (_target)
         {
