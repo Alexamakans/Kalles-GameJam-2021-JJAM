@@ -81,8 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 6612050615631173708}
   cameraHandle: {fileID: 6612050615182294869}
-  moveSpeed: 6
-  jumpForce: 380
+  moveSpeed: 8
+  jumpForce: 420
   jumpBufferTime: 0.2
   groundedCheckRange: 1.1
   groundLayerMask:
@@ -106,7 +106,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &6612050615631173711
 CapsuleCollider:
