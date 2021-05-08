@@ -14,6 +14,14 @@ public class Hook : MonoBehaviour
     public float hookMoveSpeed = 6.0f;
     public float hookEndUpForce = 750f;
     public float hookCancelUpForce = 400f;
+    public AnimationCurve hookMovementCurve = new AnimationCurve(
+        new Keyframe(0, 0),
+        new Keyframe(1, 1));
+    public bool useCurveForHookSpeedInstead = false;
+    [Tooltip("Used only for curve based movement")]
+    public float hookBaseDuration = 0.3f;
+    [Tooltip("Used only for curve based movement")]
+    public float hookDurationPerUnit = 0.08f;
     [Range(0, 5)]
     public float hookCancelPercentageOfVelocity = 1f;
     public Transform raycastFrom;
@@ -26,21 +34,39 @@ public class Hook : MonoBehaviour
     private Vector3 _raycastSphereStop;
     private bool _isHooking;
     private Vector3 _hookStartPosition;
+    private FpsController _fpsController;
+    private float _hookPercentageDone;
+    private float _hookLength;
 
     void Reset()
     {
         body = GetComponentInChildren<Rigidbody>();
     }
 
+    void Start()
+    {
+        _fpsController = GetComponent<FpsController>();
+    }
+
     void Update()
     {
         if (_isHooking)
         {
-            body.position = Vector3.MoveTowards(body.position, _targetPosition, Time.deltaTime * hookMoveSpeed);
+            if (useCurveForHookSpeedInstead)
+            {
+                transform.position = Vector3.Lerp(_hookStartPosition, _targetPosition, hookMovementCurve.Evaluate(_hookPercentageDone));
+                _hookPercentageDone += Time.deltaTime / (hookBaseDuration + hookDurationPerUnit * _hookLength);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _targetPosition, Time.deltaTime * hookMoveSpeed);
+            }
             var toTarget = _targetPosition - body.position;
             var distanceLeft = toTarget.magnitude;
+
             if (distanceLeft <= endHookDistance)
             {
+                _hookPercentageDone = 0f;
                 _isHooking = false;
                 body.isKinematic = false;
                 body.velocity = Vector3.zero;
@@ -48,13 +74,15 @@ public class Hook : MonoBehaviour
             }
             else if (Input.GetButtonDown("Jump"))
             {
+                _hookPercentageDone = 0f;
                 _isHooking = false;
                 body.isKinematic = false;
                 body.velocity = Vector3.zero;
                 body.AddForce(Vector3.up * hookEndUpForce, ForceMode.Impulse);
                 body.AddForce(toTarget.normalized * hookCancelPercentageOfVelocity, ForceMode.VelocityChange);
             }
-        } else if (_target)
+        }
+        else if (_target)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -89,6 +117,7 @@ public class Hook : MonoBehaviour
         body.isKinematic = true;
         body.velocity = Vector3.zero;
         _hookStartPosition = body.position;
+        _hookLength = (_targetPosition - _hookStartPosition).magnitude;
     }
 
     private void Targeting()

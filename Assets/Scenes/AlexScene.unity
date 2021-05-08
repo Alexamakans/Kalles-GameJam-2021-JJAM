@@ -604,6 +604,114 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: useCurveForHookSpeedInstead
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].time
+      value: 0.20023926
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].time
+      value: 0.58229315
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].value
+      value: 0.033017736
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].value
+      value: 0.33646396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[3].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].inSlope
+      value: 0.41174504
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].inSlope
+      value: 1.1752864
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[3].inSlope
+      value: 1.1093029
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].inWeight
+      value: 0.15812428
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].outSlope
+      value: 0.41174504
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].outSlope
+      value: 2.01842
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[3].inWeight
+      value: 0.1677921
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[3].outSlope
+      value: 1.1093029
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].outWeight
+      value: 0.10444226
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736996102, guid: fc453b774430c204789d69d35a22c05b, type: 3}
+      propertyPath: hookSpeedCurve.m_Curve.Array.data[2].tangentMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6612050615631173704, guid: fc453b774430c204789d69d35a22c05b, type: 3}
       propertyPath: m_Name
       value: Player
