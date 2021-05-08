@@ -82,9 +82,11 @@ MonoBehaviour:
   body: {fileID: 6612050615631173708}
   cameraHandle: {fileID: 6612050615182294869}
   moveSpeed: 8
+  airControl: 0.95
+  speedChangeRate: 0.23
   jumpForce: 420
   jumpBufferTime: 0.2
-  groundedCheckRange: 1.1
+  groundedCheckRange: 1.3
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1

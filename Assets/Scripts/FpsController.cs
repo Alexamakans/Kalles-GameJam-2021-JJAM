@@ -9,6 +9,11 @@ public class FpsController : MonoBehaviour
     
     [Header("Movement Settings")]
     public float moveSpeed = 6f;
+    [Range(0, 1)]
+    public float airControl = 0f;
+    [Range(0, 1)]
+    public float speedChangeRate = 0f;
+
     public float jumpForce = 380f;
     public float jumpBufferTime = 0.2f;
     public float groundedCheckRange = 1.1f;
@@ -98,20 +103,17 @@ public class FpsController : MonoBehaviour
             _bufferedJumpTimer = 0f;
         }
 
-        if (_isGrounded)
-        {
-            // Ground control
-            var moveVector = transform.TransformVector(_moveInput.normalized);
-            SetVelocity(moveVector * moveSpeed);
-        }
-        else
-        {
-            // Air control
-        }
+        var moveVector = transform.TransformVector(_moveInput.normalized);
+        moveVector *= moveSpeed * (_isGrounded ? 1f : airControl);
+        moveVector.y = body.velocity.y;
+        SetVelocity(moveVector, speedChangeRate);
     }
 
     void Jump()
     {
+        var newVelocity = body.velocity;
+        newVelocity.y = 0f;
+        SetVelocity(newVelocity);
         body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -132,14 +134,20 @@ public class FpsController : MonoBehaviour
         }
     }
 
+    void SetVelocity(Vector3 velocity)
+    {
+        body.AddForce(velocity - body.velocity, ForceMode.VelocityChange);
+    }
+
+    void SetVelocity(Vector3 targetVelocity, float lerpRate)
+    {
+        var actualVelocity = Vector3.Lerp(body.velocity, targetVelocity, lerpRate);
+        body.AddForce(actualVelocity - body.velocity, ForceMode.VelocityChange);
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(body.transform.position, Vector3.down * groundedCheckRange);
-    }
-
-    void SetVelocity(Vector3 velocity)
-    {
-        body.AddForce(velocity - body.velocity, ForceMode.VelocityChange);
     }
 }
