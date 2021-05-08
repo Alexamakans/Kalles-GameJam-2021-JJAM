@@ -8,7 +8,10 @@ public class FpsController : MonoBehaviour
     public GameObject cameraHandle;
     
     [Header("Movement Settings")]
-    public float moveSpeed = 6f;
+    public float walkSpeed = 6f;
+    public float sprintSpeed = 8f;
+    [Range(0, 1)]
+    public float groundControl = 1f;
     [Range(0, 1)]
     public float airControl = 0f;
     [Range(0, 1)]
@@ -26,12 +29,18 @@ public class FpsController : MonoBehaviour
     public float maximumPitch = 89.9f;
 
     private float _bufferedJumpTimer;
-    private bool isJumpQueued => _bufferedJumpTimer > 0f;
-    private bool _isGrounded = false;
+
     private Vector3 _moveInput;
+    private bool isSprinting => Input.GetButton("Sprint");
 
     private float _yaw = 0f;
     private float _pitch = 0f;
+
+    private bool _isGrounded = false;
+
+    private float moveSpeed => (_isGrounded && isSprinting) ? sprintSpeed : walkSpeed;
+    private float moveControl => _isGrounded ? groundControl : airControl;
+    private bool isJumpQueued => _bufferedJumpTimer > 0f;
 
     void Reset()
     {
@@ -104,7 +113,7 @@ public class FpsController : MonoBehaviour
         }
 
         var moveVector = transform.TransformVector(_moveInput.normalized);
-        moveVector *= moveSpeed * (_isGrounded ? 1f : airControl);
+        moveVector *= moveSpeed * moveControl;
         moveVector.y = body.velocity.y;
         SetVelocity(moveVector, speedChangeRate);
     }
