@@ -17,7 +17,6 @@ public class Trampolean : MonoBehaviour
         {
             var markerDir = _directionMarker.position - transform.position;
             _directionMarker.position = transform.position + markerDir.normalized;
-            Debug.Log("yo moma");
         }
     }
 
