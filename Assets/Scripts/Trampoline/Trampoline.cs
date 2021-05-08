@@ -1,35 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [ExecuteAlways]
+#endif
 public class Trampoline : MonoBehaviour
 {
-    [SerializeField] float _launchForce = 20f;
-    [SerializeField] Vector3 _direction = Vector3.up;
-    [SerializeField] Transform _directionMarker;
-
-    Vector3 _launchDirection => _direction;
+    public float launchForce = 20f;
+    public Transform directionMarker;
+    
+    public Vector3 launchDirection { get; private set; }
 
     void Update()
     {
+#if UNITY_EDITOR
         if (!Application.isPlaying)
         {
-            var markerDir = _directionMarker.position - transform.position;
-            _directionMarker.position = transform.position + markerDir.normalized;
-            Debug.Log("yo moma");
+            var markerDir = directionMarker.position - transform.position;
+            launchDirection = markerDir.normalized;
+            directionMarker.position = transform.position
+                + launchDirection * Mathf.Max(launchForce * 0.01f, 2f);
         }
+#endif
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
-        Debug.DrawRay(transform.position, _launchDirection);
+        Gizmos.DrawRay(transform.position, launchDirection * Mathf.Max(launchForce * 0.01f, 2f));
     }
 
     void OnCollisionEnter(Collision other)
     {
-        other.rigidbody.velocity = Vector3.zero;
-        other.rigidbody.AddForce((_directionMarker.position - transform.position) * _launchForce, ForceMode.VelocityChange);
+        if (other.rigidbody)
+        {
+            other.rigidbody.velocity = Vector3.zero;
+            other.rigidbody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
+        }
     }
-
 }
