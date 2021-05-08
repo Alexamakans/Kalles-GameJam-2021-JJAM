@@ -6,7 +6,9 @@ public class Hook : MonoBehaviour
     public float range = 10f;
     public float autoTargetRadius = 3f;
     public float endHookDistance = 1f;
-
+    [Range(1f, 90f)]
+    [Tooltip("Max angle between forward and hook position in degrees")]
+    public float maxTargetAngle = 60f;
     [Range(0, 10)]
     [Tooltip("In units per second")]
     public float hookMoveSpeed = 6.0f;
@@ -110,6 +112,7 @@ public class Hook : MonoBehaviour
 
         hits = from hit in hits
                where IsVisibleForPlayer(hit)
+               where IsAboveish(hit)
                orderby DistanceToPlayer(hit) // Ascending, shortest first
                select hit;
 
@@ -144,6 +147,11 @@ public class Hook : MonoBehaviour
         {
             _target = null;
         }
+    }
+
+    private bool IsAboveish(RaycastHit hit)
+    {
+        return Vector3.Dot(raycastFrom.forward, (hit.point - body.position).normalized) > Mathf.Cos(Mathf.Deg2Rad * (90f - maxTargetAngle));
     }
 
     private bool IsVisibleForPlayer(RaycastHit hit)
