@@ -92,7 +92,7 @@ MonoBehaviour:
   groundDrag: 0.2
   groundControl: 1
   airControl: 0.75
-  jumpForce: 420
+  jumpForce: 510
   jumpBufferTime: 0.2
   groundedCheckRange: 1.3
   groundLayerMask:
