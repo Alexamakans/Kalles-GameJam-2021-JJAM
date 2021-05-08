@@ -5,8 +5,9 @@ public class Hook : MonoBehaviour
 {
     public float range = 10f;
     public float autoTargetRadius = 3f;
+    public float endHookDistance = 1f;
 
-    [Range(0, 1)]
+    [Range(0, 10)]
     [Tooltip("In percentage of distance travelled per second")]
     public float hookSpeed = 0.5f;
     public float hookEndUpForce = 750f;
@@ -31,10 +32,11 @@ public class Hook : MonoBehaviour
     {
         if (_isHooking)
         {
-            body.position = Vector3.Lerp(_hookStartPosition, _targetPosition, _hookPercentageDone);
+            body.position = Vector3.Lerp(_hookStartPosition, _targetPosition, Mathf.Pow(_hookPercentageDone, 1.3f));
             _hookPercentageDone += Time.deltaTime * hookSpeed;
 
-            if (_hookPercentageDone >= 1f)
+            var distanceLeft = (body.position - _targetPosition).magnitude;
+            if (distanceLeft <= endHookDistance || _hookPercentageDone >= 1f)
             {
                 _hookPercentageDone = 0f;
                 _isHooking = false;
@@ -97,6 +99,7 @@ public class Hook : MonoBehaviour
             autoTargetRadius,
             playerToSphereStopDistance,
             hookableLayerMask).AsEnumerable();
+
         hits = from hit in hits
                where IsVisibleForPlayer(hit)
                orderby DistanceToPlayer(hit) // Ascending, shortest first

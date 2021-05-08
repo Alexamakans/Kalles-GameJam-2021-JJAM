@@ -191,7 +191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 12
   autoTargetRadius: 2.5
-  hookSpeed: 0.95
+  endHookDistance: 1
+  hookSpeed: 3
   hookEndUpForce: 700
   raycastFrom: {fileID: 6612050615182294874}
   hitLayerMask:
