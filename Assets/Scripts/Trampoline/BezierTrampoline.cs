@@ -45,11 +45,11 @@ public class BezierTrampoline : MonoBehaviour
     {
         var t = 0f;
 
-        var wasKinematic = false;
+        //var wasKinematic = false;
 
         if (tx.TryGetComponent(out Rigidbody body))
         {
-            wasKinematic = body.isKinematic;
+            //wasKinematic = body.isKinematic;
             body.isKinematic = true;
         }
 
@@ -64,7 +64,8 @@ public class BezierTrampoline : MonoBehaviour
 
         if (body)
         {
-            body.isKinematic = wasKinematic;
+            body.isKinematic = false;
+            //body.isKinematic = wasKinematic;
         }
     }
 
@@ -87,11 +88,11 @@ public class BezierTrampoline : MonoBehaviour
         for (var i = 0; i < debugLineSegments; ++i)
         {
             t = i / (float)debugLineSegments;
-            
+
             var to = CalculatePosition(t);
             Gizmos.color = new Color(1f - t, Mathf.Max(0.3f, 1f - t * t), Mathf.Max(0.3f, 1f - Mathf.Sqrt(t)));
             Gizmos.DrawLine(from, to);
-            
+
             from = to;
         }
 

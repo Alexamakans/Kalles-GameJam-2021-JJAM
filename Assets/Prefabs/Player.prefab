@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e847478690925d940a186d33d8368c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15.51
+  range: 17
   autoTargetRadius: 2.5
   endHookDistance: 2
   hookMoveSpeed: 7.5
