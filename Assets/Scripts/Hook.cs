@@ -35,7 +35,7 @@ public class Hook : MonoBehaviour
     private float _hookPercentageDone;
     private float _hookLength;
 
-    public static System.Action<HookPoint> hookPointFound;
+    public static System.Action<Transform> hookPointFound;
 
     void Reset()
     {
@@ -177,9 +177,9 @@ public class Hook : MonoBehaviour
         }
 
         //Oooga boogaa
-        var hookpoint = _target ? _target.GetComponent<HookPoint>() : null;
         //Debug.Log(hookPointFound.GetInvocationList().Length > 0);
-        hookPointFound.Invoke(hookpoint);
+        var transNonPhobic = _target ? _target.transform : null;
+        hookPointFound.Invoke(transNonPhobic);
     }
 
     private bool IsAboveish(RaycastHit hit)
