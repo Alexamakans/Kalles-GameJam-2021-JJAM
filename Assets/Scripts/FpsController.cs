@@ -240,6 +240,7 @@ public class FpsController : MonoBehaviour
 
         if (clip)
         {
+            aodiuSource.PlayOneShot(clip);
             yield return new WaitForSeconds(clip.length + 0.5f);
         }
 
