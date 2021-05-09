@@ -36,13 +36,14 @@ public class FpsController : MonoBehaviour
 
     public Vector3 respawnPosition;
 
+    public float yaw = 0f;
+    public float pitch = 0f;
+    public bool isInputEnabled = true;
+
     private float _bufferedJumpTimer;
 
     private Vector3 _moveInput;
     private bool isSprinting => _wasSprinting || (_isGrounded && Input.GetButton("Sprint"));
-
-    private float _yaw = 0f;
-    private float _pitch = 0f;
 
     private bool _isGrounded = false;
     [SerializeField]
@@ -80,39 +81,40 @@ public class FpsController : MonoBehaviour
 
     void Update()
     {
-        _moveInput.x = Input.GetAxis("Horizontal");
-        _moveInput.z = Input.GetAxis("Vertical");
-
-        if (Input.GetButtonDown("Jump"))
+        if (isInputEnabled)
         {
-            _bufferedJumpTimer = jumpBufferTime;
+            _moveInput.x = Input.GetAxis("Horizontal");
+            _moveInput.z = Input.GetAxis("Vertical");
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                _bufferedJumpTimer = jumpBufferTime;
+            }
+            else if (isJumpQueued)
+            {
+                _bufferedJumpTimer -= Time.deltaTime;
+            }
+
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                var deltaYaw = Input.GetAxisRaw("Mouse X");
+                var deltaPitch = Input.GetAxisRaw("Mouse Y");
+
+                yaw += deltaYaw * horizontalSensitivity;
+                // Constraint: -180 < _yaw <= 180
+                yaw = (yaw + 360f) % 360f;
+
+                pitch = Mathf.Clamp(
+                    pitch - deltaPitch * verticalSensitivity,
+                    minimumPitch, maximumPitch);
+            }
         }
-        else if (isJumpQueued)
+        else
         {
-            _bufferedJumpTimer -= Time.deltaTime;
+            _moveInput = Vector3.zero;
         }
 
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            var deltaYaw = Input.GetAxisRaw("Mouse X");
-            var deltaPitch = Input.GetAxisRaw("Mouse Y");
-
-            _yaw += deltaYaw * horizontalSensitivity;
-            // Constraint: -180 < _yaw <= 180
-            _yaw = (_yaw + 360f) % 360f;
-
-            _pitch = Mathf.Clamp(
-                _pitch - deltaPitch * verticalSensitivity,
-                minimumPitch, maximumPitch);
-
-            var newEuler = transform.eulerAngles;
-            newEuler.y = _yaw;
-            transform.eulerAngles = newEuler;
-
-            var newCameraEuler = cameraHandle.transform.eulerAngles;
-            newCameraEuler.x = _pitch;
-            cameraHandle.transform.eulerAngles = newCameraEuler;
-        }
+        UpdateCamera();
 
         // Temporary (?) implementation of toggling cursor lock state
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -121,6 +123,17 @@ public class FpsController : MonoBehaviour
                 ? CursorLockMode.None
                 : CursorLockMode.Locked;
         }
+    }
+
+    public void UpdateCamera()
+    {
+        var newEuler = transform.eulerAngles;
+        newEuler.y = yaw;
+        transform.eulerAngles = newEuler;
+
+        var newCameraEuler = cameraHandle.transform.eulerAngles;
+        newCameraEuler.x = pitch;
+        cameraHandle.transform.eulerAngles = newCameraEuler;
     }
 
     void FixedUpdate()
@@ -246,8 +259,8 @@ public class FpsController : MonoBehaviour
 
         transform.position = respawnPosition;
         body.velocity = Vector3.zero;
-        _yaw = 0f;
-        _pitch = 0f;
+        yaw = 0f;
+        pitch = 0f;
         _bufferedJumpTimer = 0f;
     }
 }

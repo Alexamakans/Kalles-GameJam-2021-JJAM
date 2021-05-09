@@ -220,6 +220,9 @@ MonoBehaviour:
   minimumPitch: -89.9
   maximumPitch: 89.9
   respawnPosition: {x: 0, y: 0, z: 0}
+  yaw: -20
+  pitch: 0
+  isInputEnabled: 1
   _wasSprinting: 0
   jumpClips: {fileID: 11400000, guid: 7dfd80c6673f80d4f80b64c7de232ed7, type: 2}
   landingClips: {fileID: 11400000, guid: f72cdfcf1d504cb4d9b613eb1f7b38bf, type: 2}
