@@ -61,6 +61,12 @@ public class HookPointCanvasVisualizer : MonoBehaviour
 
     void Update()
     {
+        if (!_mainCamera)
+        {
+            // stuff with disabling things and stuff ooops
+            _mainCamera = Camera.main;
+        }
+
         UpdateVisible();
         UpdatePosition();
         UpdateSize();
