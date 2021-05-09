@@ -6,6 +6,7 @@ public class FpsController : MonoBehaviour
 {
     public Rigidbody body;
     public GameObject cameraHandle;
+    public CapsuleCollider capsuleCollider;
     
     [Header("Movement Settings")]
     public float walkAcceleration = 6f;
@@ -55,6 +56,7 @@ public class FpsController : MonoBehaviour
     void Reset()
     {
         body = GetComponentInChildren<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
 #if false
         // Default settings for rigidbody
         body.mass = 75f;
@@ -161,20 +163,27 @@ public class FpsController : MonoBehaviour
 
     void UpdateGroundedState()
     {
-        if (body.velocity.y <= 0.001f
-            && Physics.Raycast(
-                body.transform.position,
-                Vector3.down,
-                groundedCheckRange,
-                groundLayerMask))
+        var ray = new Ray(body.transform.position, Vector3.down);
+        if (Physics.SphereCast(
+                ray: ray,
+                radius: capsuleCollider.radius,
+                maxDistance: groundedCheckRange - capsuleCollider.radius,
+                layerMask: groundLayerMask,
+                hitInfo: out var hit))
         {
-            _isGrounded = true;
-            _wasSprinting = false;
+            var VelDotNormal = Vector3.Dot(body.velocity.normalized, hit.normal.normalized);
+            Debug.Log($"VelDotNormal={VelDotNormal}");
+
+            if (VelDotNormal < 0.1f)
+            {
+
+                _isGrounded = true;
+                _wasSprinting = false;
+                return;
+            }
         }
-        else
-        {
-            _isGrounded = false;
-        }
+
+        _isGrounded = false;
     }
 
     void SetVelocity(Vector3 velocity)

@@ -211,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 6612050615631173708}
   cameraHandle: {fileID: 6612050615182294869}
+  capsuleCollider: {fileID: 6612050615631173711}
   walkAcceleration: 60
   sprintAcceleration: 90
   maxWalkSpeed: 5
