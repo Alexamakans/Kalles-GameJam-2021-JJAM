@@ -123,17 +123,14 @@ public class FpsController : MonoBehaviour
             _bufferedJumpTimer = 0f;
         }
 
-        //if (Mathf.Approximately(moveVector.sqrMagnitude, 0f))
-        //{
-        var newVelocity = body.velocity;
+        var newVelocity = GetVelocity();
         newVelocity.x *= 1f - drag;
         newVelocity.z *= 1f - drag;
         SetVelocity(newVelocity);
-        //}
 
         var moveVector = transform.TransformVector(_moveInput.normalized);
 
-        var planeVelocity = Vector3.Scale(newVelocity, Vector3.right + Vector3.forward);
+        var planeVelocity = GetPlaneVelocity();
         var VoM = Vector3.Dot(planeVelocity.normalized, moveVector);
      
         if (VoM < 0.0f || (planeVelocity.magnitude <= maxSpeed))
@@ -183,6 +180,16 @@ public class FpsController : MonoBehaviour
     void SetVelocity(Vector3 velocity)
     {
         body.AddForce(velocity - body.velocity, ForceMode.VelocityChange);
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return body.velocity;
+    }
+
+    public Vector3 GetPlaneVelocity()
+    {
+        return Vector3.Scale(body.velocity, Vector3.forward + Vector3.right);
     }
 
     void OnDrawGizmosSelected()
