@@ -388,8 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785c6e226d48cea49ba224212f549fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fpsController: {fileID: 0}
-  cam: {fileID: 0}
+  fpsController: {fileID: 6612050615631173710}
+  cam: {fileID: 6612050616106905569}
   verticalBobFrequency: 1.3
   verticalBobStrength: 0.04
   horizontalBobFrequency: 0.65
