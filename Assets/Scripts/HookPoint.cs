@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class HookPoint : MonoBehaviour
 {
+    [Header("Anim")]
     [SerializeField] Image _circle;
     [SerializeField] Image _mouseImage;
     [SerializeField] AnimationCurve _sizeCurve;
     [SerializeField] float _curveTime;
+
     [Header("Handle")]
     [SerializeField] GameObject _canvasHandle;
+    [SerializeField] LayerMask _visibilityBlockers;
+    [SerializeField] [Range(-1, 1)] float _cameraDirAndPlayerForwardMinDot = 0.2f;
+
     float _lerpValue;
     bool _active;
     float _inverseCurveTime;
@@ -18,6 +23,7 @@ public class HookPoint : MonoBehaviour
     Vector3 mainCameraDir => (_mainCamera.transform.position - transform.position).normalized;
 
     Camera _mainCamera;
+
 
     public void Start()
     {
@@ -28,7 +34,9 @@ public class HookPoint : MonoBehaviour
 
     void UpdateVisible()
     {
-
+        var dotCameraDirPlayerForward = Vector3.Dot(mainCameraDir, transform.forward);
+        var Blocked = Physics.Raycast(transform.position, mainCameraDir, float.PositiveInfinity, _visibilityBlockers);
+        _canvasHandle.SetActive(!Blocked && dotCameraDirPlayerForward > _cameraDirAndPlayerForwardMinDot);
     }
 
     void Activate(HookPoint hp) => _active = hp == this;

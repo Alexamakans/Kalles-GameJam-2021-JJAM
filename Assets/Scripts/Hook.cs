@@ -173,7 +173,6 @@ public class Hook : MonoBehaviour
             }
 
             _targetPosition = hit.point;
-            Debug.Log(hit.transform.gameObject.GetComponent<HookPoint>());
         }
         else
         {
@@ -182,6 +181,7 @@ public class Hook : MonoBehaviour
 
         //Oooga boogaa
         var hookpoint = _target ? _target.GetComponent<HookPoint>() : null;
+        Debug.Log(hookPointFound.GetInvocationList().Length > 0);
         hookPointFound.Invoke(hookpoint);
     }
 

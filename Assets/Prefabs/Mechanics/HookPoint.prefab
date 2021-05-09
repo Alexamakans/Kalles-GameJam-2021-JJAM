@@ -138,6 +138,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   _curveTime: 0.25
   _canvasHandle: {fileID: 6619621105245038581}
+  _visibilityBlockers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &2097741191306641866
 GameObject:
   m_ObjectHideFlags: 0
