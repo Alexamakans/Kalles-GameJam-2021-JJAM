@@ -7,8 +7,43 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: blinn2
+    second: {fileID: 2100000, guid: 272383192da59d042b5f643f9e61349c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn4
+    second: {fileID: 2100000, guid: 3614df6cbc269ec4591efddededa67a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house
+    second: {fileID: 2100000, guid: 8b5b69d60f904d341b771eae2ccd3ad2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_2
+    second: {fileID: 2100000, guid: 101a155c9cf0f5e448cb3b37c27e3417, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: c3e45af92ac8ebc4fbad3224c0825b8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert10
+    second: {fileID: 2100000, guid: b77e2334ec42cfd42bca41c806251c95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert7
+    second: {fileID: 2100000, guid: c3e45af92ac8ebc4fbad3224c0825b8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: windows
-    second: {fileID: 2100000, guid: 4428aad4731be0a4e8c4b7d62bb6c9ec, type: 2}
+    second: {fileID: 2100000, guid: 9f84edc301fafb84e88e573e80ecb077, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
