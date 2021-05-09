@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/JohanScene.unity
+    guid: 312d4c32379a8a5478eaac14368d4b87
   m_configObjects: {}

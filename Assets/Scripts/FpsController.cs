@@ -35,6 +35,8 @@ public class FpsController : MonoBehaviour
     public float maximumPitch = 89.9f;
 
     public Vector3 respawnPosition;
+    public float respawnYaw = 0f;
+    public float respawnPitch = 0f;
 
     public float yaw = 0f;
     public float pitch = 0f;
@@ -259,8 +261,8 @@ public class FpsController : MonoBehaviour
 
         transform.position = respawnPosition;
         body.velocity = Vector3.zero;
-        yaw = 0f;
-        pitch = 0f;
+        yaw = respawnYaw;
+        pitch = respawnPitch;
         _bufferedJumpTimer = 0f;
     }
 }

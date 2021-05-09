@@ -219,8 +219,8 @@ MonoBehaviour:
   verticalSensitivity: 1
   minimumPitch: -89.9
   maximumPitch: 89.9
-  respawnPosition: {x: 0, y: 0, z: 0}
-  yaw: -20
+  respawnPosition: {x: 0.34, y: 3.53, z: 15.8}
+  yaw: 0
   pitch: 0
   isInputEnabled: 1
   _wasSprinting: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e847478690925d940a186d33d8368c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 17
+  range: 15.51
   autoTargetRadius: 2.5
   endHookDistance: 2
   hookMoveSpeed: 7.5

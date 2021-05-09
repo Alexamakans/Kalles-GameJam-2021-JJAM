@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndDoor : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class EndDoor : MonoBehaviour
     public float targetPitch1 = -5f;
     public float lerpPitchSpeed1 = 0.1f;
     public float doorParentYawTarget1 = -143.015f;
+
+    public MeshRenderer stonerGuy;
+
+    public Text clearText;
+    public Image clearImage;
 
     private AudioSource _audio;
     private bool _gameEnded = false;
@@ -67,7 +73,7 @@ public class EndDoor : MonoBehaviour
         }
 
         // Spawn dude image
-        // TODO
+        stonerGuy.enabled = true;
 
         // Open door
         var t = 0f;
@@ -93,7 +99,9 @@ public class EndDoor : MonoBehaviour
             doorParentYawTarget1,
             doorParent.eulerAngles.z);
 
-        _body.isKinematic = false;
-        _fpsController.isInputEnabled = true;
+        yield return new WaitForSeconds(2f);
+
+        clearText.enabled = true;
+        clearImage.enabled = true;
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
+    public HookPointCanvasVisualizer hookPointCanvasVisualizer;
     public float range = 10f;
     public float autoTargetRadius = 3f;
     public float endHookDistance = 1f;
@@ -184,15 +185,7 @@ public class Hook : MonoBehaviour
 
     private bool IsAboveish(RaycastHit hit)
     {
-        var hookPoint = hit.collider.GetComponent<HookPoint>();
-
-        if (!hookPoint)
-        {
-            Debug.LogError("Hookable object without a HookPoint component!", hit.collider.gameObject);
-            return false;
-        }
-
-        var maxTargetAngle = hookPoint.maxTargetAngle;
+        var maxTargetAngle = hookPointCanvasVisualizer.maxTargetAngle;
         var toPoint = (hit.collider.transform.position - raycastFrom.position);
 
         return Vector3.Dot(raycastFrom.forward, toPoint.normalized)

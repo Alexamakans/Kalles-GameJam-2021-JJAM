@@ -18,7 +18,7 @@ public class HookPoint : MonoBehaviour
     [Tooltip(
         "Max angle between player forward and hook position in degrees.\n" +
         "Higher requires more precision.")]
-    public float maxTargetAngle = 30f;
+    public float maxTargetAngle = 60f;
 
     float _lerpValue;
     bool _active;
@@ -33,20 +33,19 @@ public class HookPoint : MonoBehaviour
     {
         _inverseCurveTime = 1 / _curveTime;
         _mainCamera = Camera.main;
-
+        Hook.hookPointFound += Activate;
     }
 
     void UpdateVisible()
     {
-        var toCamera = _mainCamera.transform.position - transform.position;
         var Blocked = Physics.Linecast(
             transform.position,
-            mainCameraDir,
+            _mainCamera.transform.position,
             _visibilityBlockers);
         _canvasHandle.SetActive(!Blocked);
     }
 
-    void Activate(HookPoint hp) => _active = hp == this;
+    void Activate(Transform t) => _active = t == transform;
 
     void Update()
     {
@@ -66,3 +65,6 @@ public class HookPoint : MonoBehaviour
         _mouseImage.gameObject.SetActive(_lerpValue == 1);
     }
 }
+
+// Pizza Jump Man Copyright
+// Deep Dish Pizza Dash

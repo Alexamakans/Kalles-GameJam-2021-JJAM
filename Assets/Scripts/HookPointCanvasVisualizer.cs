@@ -36,7 +36,6 @@ public class HookPointCanvasVisualizer : MonoBehaviour
         Hook.hookPointFound += Activate;
         _inverseCurveTime = 1 / _curveTime;
         _mainCamera = Camera.main;
-
     }
 
     void UpdateVisible()
@@ -48,8 +47,8 @@ public class HookPointCanvasVisualizer : MonoBehaviour
         }
 
         var Blocked = Physics.Linecast(
-            _hookPoint.position,
             _mainCamera.transform.position,
+            _hookPoint.position,
             _visibilityBlockers);
         _imageHandle.SetActive(!Blocked);
     }
@@ -83,6 +82,5 @@ public class HookPointCanvasVisualizer : MonoBehaviour
         {
             _imageHandle.GetComponent<RectTransform>().anchoredPosition = _mainCamera.WorldToScreenPoint(_hookPoint.transform.position);
         }
-
     }
 }
