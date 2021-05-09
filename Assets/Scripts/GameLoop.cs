@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class GameLoop
 {
-    public static System.Action OnPlayerDeath;
-    public static System.Action PlayerRespawned;
+    public static System.Action onPlayerDeath;
+    public static System.Action playerRespawned;
 }
