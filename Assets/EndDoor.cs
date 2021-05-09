@@ -21,6 +21,8 @@ public class EndDoor : MonoBehaviour
     public float lerpPitchSpeed1 = 0.1f;
     public float doorParentYawTarget1 = -143.015f;
 
+    public GameObject clint;
+
     private AudioSource _audio;
     private bool _gameEnded = false;
 
@@ -66,8 +68,8 @@ public class EndDoor : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        // Spawn dude image
-        // TODO
+        // Display dude image
+        clint.GetComponent<MeshRenderer>().enabled = true;
 
         // Open door
         var t = 0f;
