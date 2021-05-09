@@ -1233,8 +1233,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
-      propertyPath: debugLineSegments
-      value: 5
+      propertyPath: jumpDurationSeconds
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].inSlope
+      value: 1.9661148
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].inSlope
+      value: 0.0062893233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].outSlope
+      value: 1.9661148
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].inWeight
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].outSlope
+      value: 0.0062893233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359834965174192339, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].outWeight
+      value: 0.04438406
       objectReference: {fileID: 0}
     - target: {fileID: 8777686482843248850, guid: d453d55a60c3e1d4394dcf80ac70d7a7, type: 3}
       propertyPath: m_Name

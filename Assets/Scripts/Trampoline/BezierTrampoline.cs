@@ -6,6 +6,9 @@ public class BezierTrampoline : MonoBehaviour
     public Transform peak;
     public Transform end;
 
+    public AnimationCurve speedCurve;
+    public float jumpDurationSeconds = 1f;
+
     public int debugLineSegments = 60;
 
     void OnTriggerEnter(Collider collider)
@@ -20,16 +23,29 @@ public class BezierTrampoline : MonoBehaviour
 
     IEnumerator SendFlying(Transform tx)
     {
-        var t = 0.01f;
+        var t = 0f;
+
+        var wasKinematic = false;
+
+        if (tx.TryGetComponent(out Rigidbody body))
+        {
+            wasKinematic = body.isKinematic;
+            body.isKinematic = true;
+        }
 
         while (t < 1f)
         {
-            tx.position = CalculatePosition(t);
-            yield return new WaitForSeconds(0.01f);
-            t += 0.01f;
+            tx.position = CalculatePosition(speedCurve.Evaluate(t));
+            yield return new WaitForFixedUpdate();//new WaitForSeconds(1f / 60f);
+            t += Time.fixedDeltaTime / jumpDurationSeconds;
         }
 
         tx.position = CalculatePosition(1f);
+
+        if (body)
+        {
+            body.isKinematic = wasKinematic;
+        }
     }
 
     // 3-point bezier curve
@@ -61,5 +77,8 @@ public class BezierTrampoline : MonoBehaviour
 
         Gizmos.color = new Color(1f, 0f, 0f);
         Gizmos.DrawLine(from, CalculatePosition(1f));
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(CalculatePosition(0.5f), 0.2f);
     }
 }

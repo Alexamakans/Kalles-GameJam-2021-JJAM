@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456655427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.48, y: 43.8, z: 23.3}
+  m_LocalPosition: {x: -7.3, y: 24.2, z: 16.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 687880517609255119}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3751821993404202300
 GameObject:
@@ -58,7 +58,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 687880517609255119}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8777686482843248850
 GameObject:
@@ -91,8 +91,8 @@ Transform:
   m_LocalPosition: {x: -9.54, y: 25.58, z: -57.38}
   m_LocalScale: {x: 1, y: 0.30518, z: 1}
   m_Children:
-  - {fileID: 5650925251369366898}
   - {fileID: 1456655428}
+  - {fileID: 5650925251369366898}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -23.782, z: 0}
@@ -173,4 +173,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peak: {fileID: 1456655428}
   end: {fileID: 5650925251369366898}
-  debugLineSegments: 60
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.9964304
+      outSlope: 4.9964304
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.10054348
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.35459957
+      outSlope: 0.35459957
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.23278987
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpDurationSeconds: 1
+  debugLineSegments: 15
