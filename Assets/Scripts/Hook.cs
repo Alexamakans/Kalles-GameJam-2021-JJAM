@@ -38,6 +38,8 @@ public class Hook : MonoBehaviour
     private float _hookPercentageDone;
     private float _hookLength;
 
+    public static System.Action<HookPoint> hookPointFound;
+
     void Reset()
     {
         body = GetComponentInChildren<Rigidbody>();
@@ -149,7 +151,7 @@ public class Hook : MonoBehaviour
         {
             var hit = hits.First();
             _target = hit.collider.gameObject;
- 
+
             if (Mathf.Approximately(Vector3.Dot(hit.normal, ray.direction), -1f))
             {
                 // Selected collider was inside the start of the spherecast
@@ -169,13 +171,18 @@ public class Hook : MonoBehaviour
                     hit = preciseInfo;
                 }
             }
-            
+
             _targetPosition = hit.point;
+            Debug.Log(hit.transform.gameObject.GetComponent<HookPoint>());
         }
         else
         {
             _target = null;
         }
+
+        //Oooga boogaa
+        var hookpoint = _target ? _target.GetComponent<HookPoint>() : null;
+        hookPointFound.Invoke(hookpoint);
     }
 
     private bool IsAboveish(RaycastHit hit)
@@ -210,9 +217,14 @@ public class Hook : MonoBehaviour
         if (_target)
         {
             Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(_target.transform.position, 1.5f);
             Gizmos.DrawWireSphere(_targetPosition, 1.5f);
         }
-
+        if (!Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, range);
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_raycastSphereStop, autoTargetRadius);
     }
