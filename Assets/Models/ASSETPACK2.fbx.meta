@@ -3,7 +3,67 @@ guid: cd24b7b43dbfba84eae289af801b5c20
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BLUE_NEON
+    second: {fileID: 2100000, guid: ef6c8d734a711f944849bf33dc101b15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: YELLOWnEON
+    second: {fileID: 2100000, guid: 62334375212e14249ab33cc34de52277, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: green_neon
+    second: {fileID: 2100000, guid: 344ad841e4bc0ee418ede9c22e4720c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house
+    second: {fileID: 2100000, guid: a52f6c2f096624b4ea0b48d5c80d50ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_2
+    second: {fileID: 2100000, guid: 9e7ce7deea0087d49b8fa9832bc6395e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert13
+    second: {fileID: 2100000, guid: bba5094992933f6499091df255833d45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 62334375212e14249ab33cc34de52277, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: 62334375212e14249ab33cc34de52277, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pink
+    second: {fileID: 2100000, guid: 4311a78c9b2a7fd42a7d885b2431633e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_neon
+    second: {fileID: 2100000, guid: bba5094992933f6499091df255833d45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: whitebright
+    second: {fileID: 2100000, guid: 62334375212e14249ab33cc34de52277, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: windows
+    second: {fileID: 2100000, guid: 9f84edc301fafb84e88e573e80ecb077, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
