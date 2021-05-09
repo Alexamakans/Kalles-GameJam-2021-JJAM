@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1655725765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655725766}
+  m_Layer: 3
+  m_Name: LerpTo_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1655725766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655725765}
+  m_LocalRotation: {x: -0.0069562346, y: -0.9894087, z: -0.1358509, w: 0.050662655}
+  m_LocalPosition: {x: 0.090363026, y: -0.98715115, z: 1.6281246}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8135148175309698183}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -15.636, y: -174.137, z: 0}
 --- !u!1 &1444045237085529725
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,8 @@ GameObject:
   - component: {fileID: 8135148175309698183}
   - component: {fileID: 3317362592398618167}
   - component: {fileID: 8717736381365852344}
-  - component: {fileID: 6390166504660079172}
+  - component: {fileID: 1527670771}
+  - component: {fileID: 3673302818085692649}
   m_Layer: 0
   m_Name: Doors
   m_TagString: Untagged
@@ -29,7 +60,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1655725766}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,17 +117,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6390166504660079172
-MeshCollider:
+--- !u!65 &1527670771
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444045237085529725}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4162253513501663206, guid: a234afefe72199447a66c38198b3e30d, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.8207757, z: 2}
+  m_Center: {x: 0.00000005960465, y: 0, z: 0}
+--- !u!114 &3673302818085692649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444045237085529725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b9578b78d80bf48938f57e37a74de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorParent: {fileID: 0}
+  player: {fileID: 0}
+  camHandle: {fileID: 0}
+  pizzaHandle: {fileID: 0}
+  pizza: {fileID: 0}
+  lerpTo1: {fileID: 0}
+  lerpSpeed1: 0.1
+  targetYaw1: -20.582
+  lerpYawSpeed1: 0.08
+  targetPitch1: -5
+  lerpPitchSpeed1: 0.1

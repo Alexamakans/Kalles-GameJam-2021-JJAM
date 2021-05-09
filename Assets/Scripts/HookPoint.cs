@@ -14,7 +14,11 @@ public class HookPoint : MonoBehaviour
     [Header("Handle")]
     [SerializeField] GameObject _canvasHandle;
     [SerializeField] LayerMask _visibilityBlockers;
-    [SerializeField] [Range(-1, 1)] float _cameraDirAndPlayerForwardMinDot = 0.2f;
+    [Range(1f, 90f)]
+    [Tooltip(
+        "Max angle between player forward and hook position in degrees.\n" +
+        "Higher requires more precision.")]
+    public float maxTargetAngle = 30f;
 
     float _lerpValue;
     bool _active;
@@ -35,9 +39,13 @@ public class HookPoint : MonoBehaviour
 
     void UpdateVisible()
     {
-        var dotCameraDirPlayerForward = Vector3.Dot(mainCameraDir, transform.forward);
-        var Blocked = Physics.Raycast(transform.position, mainCameraDir, float.PositiveInfinity, _visibilityBlockers);
-        _canvasHandle.SetActive(!Blocked && dotCameraDirPlayerForward > _cameraDirAndPlayerForwardMinDot);
+        var toCamera = _mainCamera.transform.position - transform.position;
+        var Blocked = Physics.Raycast(
+            transform.position,
+            mainCameraDir,
+            toCamera.magnitude,
+            _visibilityBlockers);
+        _canvasHandle.SetActive(!Blocked);
     }
 
     void Activate(HookPoint hp) => _active = hp == this;
