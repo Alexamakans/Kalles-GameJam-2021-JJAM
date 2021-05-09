@@ -185,11 +185,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 369483827555871464, guid: ad8b71dc48643414e8dd7265b072faf7, type: 3}
   m_PrefabInstance: {fileID: 8626415}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &17249948 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-  m_PrefabInstance: {fileID: 1776722914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &18549794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,7 +2596,6 @@ Transform:
   - {fileID: 731084559}
   - {fileID: 348193594}
   - {fileID: 951678088}
-  - {fileID: 17249948}
   - {fileID: 1093578869}
   - {fileID: 1441989601}
   m_Father: {fileID: 0}
@@ -6525,7 +6519,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10428,7 +10422,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11478,71 +11472,6 @@ PrefabInstance:
     - target: {fileID: 5462672232349773790, guid: fed32f228bfe20247980bd69f9708096, type: 3}
       propertyPath: m_Name
       value: NormalTrampolean Up (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967734183206089342, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967734183206089342, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fed32f228bfe20247980bd69f9708096, type: 3}
---- !u!1001 &1776722914
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 290373113}
-    m_Modifications:
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.240444
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.3114178
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.536507
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.2588194
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.9659258
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -210
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293060218147141571, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5462672232349773790, guid: fed32f228bfe20247980bd69f9708096, type: 3}
-      propertyPath: m_Name
-      value: NormalTrampolean Up (8)
       objectReference: {fileID: 0}
     - target: {fileID: 8967734183206089342, guid: fed32f228bfe20247980bd69f9708096, type: 3}
       propertyPath: m_LocalPosition.x
