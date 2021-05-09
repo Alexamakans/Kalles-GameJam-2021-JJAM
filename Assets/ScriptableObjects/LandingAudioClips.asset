@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557d96614ddc51648903af024daf7b0c, type: 3}
+  m_Name: LandingAudioClips
+  m_EditorClassIdentifier: 
+  _audioClips:
+  - {fileID: 8300000, guid: 09e3bd8ae69c3a848bb23286af2f8714, type: 3}
+  - {fileID: 8300000, guid: ec82cc1dfb9e02346970b94283b9d6d8, type: 3}
+  - {fileID: 8300000, guid: f92d7dc2dafbb7847897027001a9103e, type: 3}

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: JumpAudioClips
   m_EditorClassIdentifier: 
   _audioClips:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 42c33dc6b7eba1746b2009640f06b2ed, type: 3}
+  - {fileID: 8300000, guid: c37f0cd08d792144282bc62cc3f476c3, type: 3}
+  - {fileID: 8300000, guid: a11693d8c7a61004cb056b160b343235, type: 3}
+  - {fileID: 8300000, guid: 0be68484caf89704bb562b3c4b9bb24c, type: 3}

@@ -34,6 +34,8 @@ public class FpsController : MonoBehaviour
     public float minimumPitch = -89.9f;
     public float maximumPitch = 89.9f;
 
+    public Vector3 respawnPosition;
+
     private float _bufferedJumpTimer;
 
     private Vector3 _moveInput;
@@ -46,8 +48,10 @@ public class FpsController : MonoBehaviour
     [SerializeField]
     private bool _wasSprinting = false;
     [Header("Audio")]
-    [SerializeField] RandomizingAodiuPhile _randomizingAodiuPhile;
-    private AudioSource _audioSource;
+    public RandomizingAodiuPhile jumpClips;
+    public RandomizingAodiuPhile landingClips;
+    public RandomizingAodiuPhile theOnePizzaClips;
+    public AudioSource aodiuSource;
 
     private float moveAcceleration => isSprinting ? sprintAcceleration : walkAcceleration;
     private float moveControl => _isGrounded ? groundControl : airControl;
@@ -60,7 +64,7 @@ public class FpsController : MonoBehaviour
     {
         body = GetComponentInChildren<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        _audioSource = GetComponent<AudioSource>();
+        aodiuSource = GetComponent<AudioSource>();
 #if false
         // Default settings for rigidbody
         body.mass = 75f;
@@ -71,6 +75,7 @@ public class FpsController : MonoBehaviour
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        GameLoop.onPlayerDeath += OnDeath;
     }
 
     void Update()
@@ -164,12 +169,11 @@ public class FpsController : MonoBehaviour
         SetVelocity(newVelocity);
         body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-        var clip = _randomizingAodiuPhile.GetClip();
+        var clip = jumpClips.GetClip();
         if (clip)
         {
-            _audioSource.PlayOneShot(clip);
+            aodiuSource.PlayOneShot(clip);
         }
-
     }
 
     void UpdateGroundedState()
@@ -186,6 +190,14 @@ public class FpsController : MonoBehaviour
 
             if (VelDotNormal < 0.1f)
             {
+                if (!_isGrounded)
+                {
+                    var clip = landingClips.GetClip();
+                    if (clip)
+                    {
+                        aodiuSource.PlayOneShot(clip);
+                    }
+                }
 
                 _isGrounded = true;
                 _wasSprinting = false;
@@ -215,5 +227,26 @@ public class FpsController : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(body.transform.position, Vector3.down * groundedCheckRange);
+    }
+
+    void OnDeath()
+    {
+        StartCoroutine(OnDeath_Coroutine());
+    }
+
+    IEnumerator OnDeath_Coroutine()
+    {
+        var clip = theOnePizzaClips.GetClip();
+
+        if (clip)
+        {
+            yield return new WaitForSeconds(clip.length + 0.5f);
+        }
+
+        transform.position = respawnPosition;
+        body.velocity = Vector3.zero;
+        _yaw = 0f;
+        _pitch = 0f;
+        _bufferedJumpTimer = 0f;
     }
 }

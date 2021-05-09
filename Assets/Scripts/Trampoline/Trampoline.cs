@@ -43,6 +43,16 @@ public class Trampoline : MonoBehaviour
     {
         if (collider.TryGetComponent<Rigidbody>(out var otherBody))
         {
+            if (collider.CompareTag("Player"))
+            {
+                var fpsController = collider.GetComponent<FpsController>();
+                var clip = fpsController.jumpClips.GetClip();
+                if (clip)
+                {
+                    fpsController.aodiuSource.PlayOneShot(clip);
+                }
+            }
+
             otherBody.velocity = Vector3.zero;
             otherBody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
         }
@@ -52,6 +62,16 @@ public class Trampoline : MonoBehaviour
     {
         if (other.rigidbody)
         {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                var fpsController = other.gameObject.GetComponent<FpsController>();
+                var clip = fpsController.jumpClips.GetClip();
+                if (clip)
+                {
+                    fpsController.aodiuSource.PlayOneShot(clip);
+                }
+            }
+
             other.rigidbody.velocity = Vector3.zero;
             other.rigidbody.AddForce(launchDirection * launchForce, ForceMode.VelocityChange);
         }

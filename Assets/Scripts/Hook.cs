@@ -181,8 +181,11 @@ public class Hook : MonoBehaviour
 
         //Oooga boogaa
         var hookpoint = _target ? _target.GetComponent<HookPoint>() : null;
-        Debug.Log(hookPointFound.GetInvocationList().Length > 0);
-        hookPointFound.Invoke(hookpoint);
+        if (hookpoint)
+        {
+            Debug.Log(hookPointFound.GetInvocationList().Length > 0);
+            hookPointFound.Invoke(hookpoint);
+        }
     }
 
     private bool IsAboveish(RaycastHit hit)

@@ -13,11 +13,31 @@ public class BezierTrampoline : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        if (collider.CompareTag("Player"))
+        {
+            var fpsController = collider.GetComponent<FpsController>();
+            var clip = fpsController.jumpClips.GetClip();
+            if (clip)
+            {
+                fpsController.aodiuSource.PlayOneShot(clip);
+            }
+        }
+
         StartCoroutine(SendFlying(collider.transform));
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            var fpsController = collision.gameObject.GetComponent<FpsController>();
+            var clip = fpsController.jumpClips.GetClip();
+            if (clip)
+            {
+                fpsController.aodiuSource.PlayOneShot(clip);
+            }
+        }
+
         StartCoroutine(SendFlying(collision.transform));
     }
 
