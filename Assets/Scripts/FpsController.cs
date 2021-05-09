@@ -7,7 +7,7 @@ public class FpsController : MonoBehaviour
     public Rigidbody body;
     public GameObject cameraHandle;
     public CapsuleCollider capsuleCollider;
-    
+
     [Header("Movement Settings")]
     public float walkAcceleration = 6f;
     public float sprintAcceleration = 8f;
@@ -134,7 +134,7 @@ public class FpsController : MonoBehaviour
 
         var planeVelocity = GetPlaneVelocity();
         var VoM = Vector3.Dot(planeVelocity.normalized, moveVector);
-     
+
         if (VoM < 0.0f || (planeVelocity.magnitude <= maxSpeed))
         {
             moveVector *= moveAcceleration * moveControl;
@@ -172,7 +172,6 @@ public class FpsController : MonoBehaviour
                 hitInfo: out var hit))
         {
             var VelDotNormal = Vector3.Dot(body.velocity.normalized, hit.normal.normalized);
-            Debug.Log($"VelDotNormal={VelDotNormal}");
 
             if (VelDotNormal < 0.1f)
             {
