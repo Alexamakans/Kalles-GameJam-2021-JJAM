@@ -30,6 +30,7 @@ public class HookPoint : MonoBehaviour
         Hook.hookPointFound += Activate;
         _inverseCurveTime = 1 / _curveTime;
         _mainCamera = Camera.main;
+
     }
 
     void UpdateVisible()

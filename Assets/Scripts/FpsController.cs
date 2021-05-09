@@ -45,6 +45,9 @@ public class FpsController : MonoBehaviour
     private bool _isGrounded = false;
     [SerializeField]
     private bool _wasSprinting = false;
+    [Header("Audio")]
+    [SerializeField] RandomizingAodiuPhile _randomizingAodiuPhile;
+    private AudioSource _audioSource;
 
     private float moveAcceleration => isSprinting ? sprintAcceleration : walkAcceleration;
     private float moveControl => _isGrounded ? groundControl : airControl;
@@ -57,6 +60,7 @@ public class FpsController : MonoBehaviour
     {
         body = GetComponentInChildren<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        _audioSource = GetComponent<AudioSource>();
 #if false
         // Default settings for rigidbody
         body.mass = 75f;
@@ -159,6 +163,13 @@ public class FpsController : MonoBehaviour
         newVelocity.y = 0f;
         SetVelocity(newVelocity);
         body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        var clip = _randomizingAodiuPhile.GetClip();
+        if (clip)
+        {
+            _audioSource.PlayOneShot(clip);
+        }
+
     }
 
     void UpdateGroundedState()

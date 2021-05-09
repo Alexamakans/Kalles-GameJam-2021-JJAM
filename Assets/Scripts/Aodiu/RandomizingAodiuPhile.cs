@@ -7,7 +7,7 @@ public class RandomizingAodiuPhile : ScriptableObject
 {
     [SerializeField] AudioClip[] _audioClips = new AudioClip[1];
 
-    AudioClip GetClip()
+    public AudioClip GetClip()
     {
         var clipIndex = Random.Range(0, _audioClips.Length);
         return _audioClips[clipIndex];
