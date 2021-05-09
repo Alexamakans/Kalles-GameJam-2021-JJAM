@@ -190,7 +190,7 @@ public class FpsController : MonoBehaviour
 
             if (VelDotNormal < 0.1f)
             {
-                if (!_isGrounded)
+                if (!_isGrounded && body.velocity.y < -1.5f)
                 {
                     var clip = landingClips.GetClip();
                     if (clip)

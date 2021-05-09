@@ -141,6 +141,7 @@ MonoBehaviour:
   _visibilityBlockers:
     serializedVersion: 2
     m_Bits: 1
+  maxTargetAngle: 30
 --- !u!1 &2097741191306641866
 GameObject:
   m_ObjectHideFlags: 0
